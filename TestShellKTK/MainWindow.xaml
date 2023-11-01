@@ -1,0 +1,58 @@
+﻿<Window x:Class="TestShellKTK.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestShellKTK"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Студенты">
+            <ListBox Name="lbStudents"  Margin="10" ItemsSource="{Binding Students}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="Имя пользователя:"/>
+                            <Run Text="{Binding Username}"/>
+                            <LineBreak/>
+                            <Run Text="Пароль:"/>
+                            <Run Text="{Binding Password}"/>
+                            <LineBreak/>
+                            <Run Text="Класс:"/>
+                            <Run Text="{Binding NameClass}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        
+        <!-- <GroupBox Grid.Column="1" Header="Редактирование"> -->
+        <!--     <StackPanel Name="spStudentsEditor" IsEnabled="False" DataContext="{Binding Students}"> -->
+        <!-- -->
+        <!--         <TextBox Name="tbStudentUsernameEdit"></TextBox> -->
+        <!--     </StackPanel> -->
+        <!-- </GroupBox> -->
+        
+        <GroupBox Grid.Column="2" Header="Новый студент">
+            <StackPanel Margin="10 0" DataContext="{Binding Student}">
+                <Label>Введите имя пользователя:</Label>
+                <TextBox Text="{Binding Username}" Name="tbStudentUsername"></TextBox>
+                <Label>Введите пароль пользвателя:</Label>
+                <TextBox Text="{Binding Password}" Name="tbStudentPassword"></TextBox>
+                <Label>Введите название класса</Label>
+                <TextBox Text="{Binding NameClass}" Name="tbStudentNameClass"></TextBox>
+                <Button Click="AddStudent" Margin="0 20"> Новый студент</Button>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
