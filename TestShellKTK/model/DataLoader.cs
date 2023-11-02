@@ -10,8 +10,7 @@ public class DataLoader
     public static void LoadStudents()
     {
         Students.Clear();
-        NpgsqlCommand command = PostgresRepository.Command("Select username, password, class.name " +
-                                                           "From student " +
+        NpgsqlCommand command = PostgresRepository.Command("Select username, \"password\", class.name From student " +
                                                            "INNER JOIN class ON class_id = class.id;");
         NpgsqlDataReader result = command.ExecuteReader();
         if (result.HasRows)
@@ -26,5 +25,6 @@ public class DataLoader
             }
         }
         result.Close();
+        
     }
 }
