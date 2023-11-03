@@ -1,0 +1,855 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestMasterdDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="answer_option">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question_id" Type="int" />
+          <Property Name="answer_text" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="assigned_test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="test_id" Type="int" />
+          <Property Name="assigned_by" Type="int" />
+          <Property Name="assigned_to" Type="int" />
+          <Property Name="attempts_allowed" Type="int" Nullable="false" />
+          <Property Name="assigned_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="class">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="correct_answer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question_id" Type="int" />
+          <Property Name="correct_option_id" Type="int" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="test_id" Type="int" />
+          <Property Name="question_text" Type="varchar(max)" Nullable="false" />
+          <Property Name="hint" Type="varchar(max)" />
+          <Property Name="weight" Type="int" Nullable="false" />
+          <Property Name="question_type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="class_id" Type="int" />
+        </EntityType>
+        <EntityType Name="teacher_subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="teacher_id" Type="int" />
+          <Property Name="subject_id" Type="int" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="subject_id" Type="int" />
+          <Property Name="duration" Type="time" Precision="7" Nullable="false" />
+          <Property Name="grading_scale" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="test_result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="assigned_test_id" Type="int" />
+          <Property Name="start_time" Type="datetime" />
+          <Property Name="end_time" Type="datetime" />
+          <Property Name="score" Type="float" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="int" />
+        </EntityType>
+        <Association Name="FK__answer_op__quest__5070F446">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="answer_option" Type="Self.answer_option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="answer_option">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assigned___assig__5812160E">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assigned_test">
+              <PropertyRef Name="assigned_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assigned___assig__59063A47">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assigned_test">
+              <PropertyRef Name="assigned_to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assigned___test___571DF1D5">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assigned_test">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__correct_a__corre__5441852A">
+          <End Role="answer_option" Type="Self.answer_option" Multiplicity="0..1" />
+          <End Role="correct_answer" Type="Self.correct_answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="answer_option">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="correct_answer">
+              <PropertyRef Name="correct_option_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__correct_a__quest__534D60F1">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="correct_answer" Type="Self.correct_answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="correct_answer">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__question__test_i__4D94879B">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subject__class_i__4222D4EF">
+          <End Role="class" Type="Self.class" Multiplicity="0..1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="class">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="class_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacher_s__subje__45F365D3">
+          <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
+          <End Role="teacher_subject" Type="Self.teacher_subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teacher_subject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacher_s__teach__44FF419A">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="teacher_subject" Type="Self.teacher_subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teacher_subject">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test__created_by__48CFD27E">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test__subject_id__4AB81AF0">
+          <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test_resu__assig__5CD6CB2B">
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="0..1" />
+          <End Role="test_result" Type="Self.test_result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assigned_test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test_result">
+              <PropertyRef Name="assigned_test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__role__3B75D760">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestMasterdDBModelStoreContainer">
+          <EntitySet Name="answer_option" EntityType="Self.answer_option" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="assigned_test" EntityType="Self.assigned_test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="class" EntityType="Self.class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="correct_answer" EntityType="Self.correct_answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test_result" EntityType="Self.test_result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__answer_op__quest__5070F446" Association="Self.FK__answer_op__quest__5070F446">
+            <End Role="question" EntitySet="question" />
+            <End Role="answer_option" EntitySet="answer_option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assigned___assig__5812160E" Association="Self.FK__assigned___assig__5812160E">
+            <End Role="user" EntitySet="user" />
+            <End Role="assigned_test" EntitySet="assigned_test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assigned___assig__59063A47" Association="Self.FK__assigned___assig__59063A47">
+            <End Role="user" EntitySet="user" />
+            <End Role="assigned_test" EntitySet="assigned_test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assigned___test___571DF1D5" Association="Self.FK__assigned___test___571DF1D5">
+            <End Role="test" EntitySet="test" />
+            <End Role="assigned_test" EntitySet="assigned_test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__correct_a__corre__5441852A" Association="Self.FK__correct_a__corre__5441852A">
+            <End Role="answer_option" EntitySet="answer_option" />
+            <End Role="correct_answer" EntitySet="correct_answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__correct_a__quest__534D60F1" Association="Self.FK__correct_a__quest__534D60F1">
+            <End Role="question" EntitySet="question" />
+            <End Role="correct_answer" EntitySet="correct_answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__question__test_i__4D94879B" Association="Self.FK__question__test_i__4D94879B">
+            <End Role="test" EntitySet="test" />
+            <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subject__class_i__4222D4EF" Association="Self.FK__subject__class_i__4222D4EF">
+            <End Role="class" EntitySet="class" />
+            <End Role="subject" EntitySet="subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher_s__subje__45F365D3" Association="Self.FK__teacher_s__subje__45F365D3">
+            <End Role="subject" EntitySet="subject" />
+            <End Role="teacher_subject" EntitySet="teacher_subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher_s__teach__44FF419A" Association="Self.FK__teacher_s__teach__44FF419A">
+            <End Role="user" EntitySet="user" />
+            <End Role="teacher_subject" EntitySet="teacher_subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test__created_by__48CFD27E" Association="Self.FK__test__created_by__48CFD27E">
+            <End Role="user" EntitySet="user" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test__subject_id__4AB81AF0" Association="Self.FK__test__subject_id__4AB81AF0">
+            <End Role="subject" EntitySet="subject" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test_resu__assig__5CD6CB2B" Association="Self.FK__test_resu__assig__5CD6CB2B">
+            <End Role="assigned_test" EntitySet="assigned_test" />
+            <End Role="test_result" EntitySet="test_result" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__role__3B75D760" Association="Self.FK__user__role__3B75D760">
+            <End Role="role" EntitySet="role" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestMasterdDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="answer_option">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question_id" Type="Int32" />
+          <Property Name="answer_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="question" Relationship="Self.FK__answer_op__quest__5070F446" FromRole="answer_option" ToRole="question" />
+          <NavigationProperty Name="correct_answer" Relationship="Self.FK__correct_a__corre__5441852A" FromRole="answer_option" ToRole="correct_answer" />
+        </EntityType>
+        <EntityType Name="assigned_test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="test_id" Type="Int32" />
+          <Property Name="assigned_by" Type="Int32" />
+          <Property Name="assigned_to" Type="Int32" />
+          <Property Name="attempts_allowed" Type="Int32" Nullable="false" />
+          <Property Name="assigned_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="user" Relationship="Self.FK__assigned___assig__5812160E" FromRole="assigned_test" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK__assigned___assig__59063A47" FromRole="assigned_test" ToRole="user" />
+          <NavigationProperty Name="test" Relationship="Self.FK__assigned___test___571DF1D5" FromRole="assigned_test" ToRole="test" />
+          <NavigationProperty Name="test_result" Relationship="Self.FK__test_resu__assig__5CD6CB2B" FromRole="assigned_test" ToRole="test_result" />
+        </EntityType>
+        <EntityType Name="class">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="subjects" Relationship="Self.FK__subject__class_i__4222D4EF" FromRole="class" ToRole="subject" />
+        </EntityType>
+        <EntityType Name="correct_answer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question_id" Type="Int32" />
+          <Property Name="correct_option_id" Type="Int32" />
+          <NavigationProperty Name="answer_option" Relationship="Self.FK__correct_a__corre__5441852A" FromRole="correct_answer" ToRole="answer_option" />
+          <NavigationProperty Name="question" Relationship="Self.FK__correct_a__quest__534D60F1" FromRole="correct_answer" ToRole="question" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="test_id" Type="Int32" />
+          <Property Name="question_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hint" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="weight" Type="Int32" Nullable="false" />
+          <Property Name="question_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="answer_option" Relationship="Self.FK__answer_op__quest__5070F446" FromRole="question" ToRole="answer_option" />
+          <NavigationProperty Name="correct_answer" Relationship="Self.FK__correct_a__quest__534D60F1" FromRole="question" ToRole="correct_answer" />
+          <NavigationProperty Name="test" Relationship="Self.FK__question__test_i__4D94879B" FromRole="question" ToRole="test" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK__user__role__3B75D760" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="class_id" Type="Int32" />
+          <NavigationProperty Name="class" Relationship="Self.FK__subject__class_i__4222D4EF" FromRole="subject" ToRole="class" />
+          <NavigationProperty Name="teacher_subject" Relationship="Self.FK__teacher_s__subje__45F365D3" FromRole="subject" ToRole="teacher_subject" />
+          <NavigationProperty Name="tests" Relationship="Self.FK__test__subject_id__4AB81AF0" FromRole="subject" ToRole="test" />
+        </EntityType>
+        <EntityType Name="teacher_subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teacher_id" Type="Int32" />
+          <Property Name="subject_id" Type="Int32" />
+          <NavigationProperty Name="subject" Relationship="Self.FK__teacher_s__subje__45F365D3" FromRole="teacher_subject" ToRole="subject" />
+          <NavigationProperty Name="user" Relationship="Self.FK__teacher_s__teach__44FF419A" FromRole="teacher_subject" ToRole="user" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="subject_id" Type="Int32" />
+          <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="grading_scale" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="assigned_test" Relationship="Self.FK__assigned___test___571DF1D5" FromRole="test" ToRole="assigned_test" />
+          <NavigationProperty Name="questions" Relationship="Self.FK__question__test_i__4D94879B" FromRole="test" ToRole="question" />
+          <NavigationProperty Name="subject" Relationship="Self.FK__test__subject_id__4AB81AF0" FromRole="test" ToRole="subject" />
+          <NavigationProperty Name="user" Relationship="Self.FK__test__created_by__48CFD27E" FromRole="test" ToRole="user" />
+        </EntityType>
+        <EntityType Name="test_result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="assigned_test_id" Type="Int32" />
+          <Property Name="start_time" Type="DateTime" Precision="3" />
+          <Property Name="end_time" Type="DateTime" Precision="3" />
+          <Property Name="score" Type="Double" />
+          <NavigationProperty Name="assigned_test" Relationship="Self.FK__test_resu__assig__5CD6CB2B" FromRole="test_result" ToRole="assigned_test" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="assigned_test" Relationship="Self.FK__assigned___assig__5812160E" FromRole="user" ToRole="assigned_test" />
+          <NavigationProperty Name="assigned_test1" Relationship="Self.FK__assigned___assig__59063A47" FromRole="user" ToRole="assigned_test" />
+          <NavigationProperty Name="role1" Relationship="Self.FK__user__role__3B75D760" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="teacher_subject" Relationship="Self.FK__teacher_s__teach__44FF419A" FromRole="user" ToRole="teacher_subject" />
+          <NavigationProperty Name="tests" Relationship="Self.FK__test__created_by__48CFD27E" FromRole="user" ToRole="test" />
+        </EntityType>
+        <Association Name="FK__answer_op__quest__5070F446">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="answer_option" Type="Self.answer_option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="answer_option">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__correct_a__corre__5441852A">
+          <End Role="answer_option" Type="Self.answer_option" Multiplicity="0..1" />
+          <End Role="correct_answer" Type="Self.correct_answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="answer_option">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="correct_answer">
+              <PropertyRef Name="correct_option_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assigned___assig__5812160E">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assigned_test">
+              <PropertyRef Name="assigned_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assigned___assig__59063A47">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assigned_test">
+              <PropertyRef Name="assigned_to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__assigned___test___571DF1D5">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="assigned_test">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test_resu__assig__5CD6CB2B">
+          <End Role="assigned_test" Type="Self.assigned_test" Multiplicity="0..1" />
+          <End Role="test_result" Type="Self.test_result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assigned_test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test_result">
+              <PropertyRef Name="assigned_test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__subject__class_i__4222D4EF">
+          <End Role="class" Type="Self.class" Multiplicity="0..1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="class">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="class_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__correct_a__quest__534D60F1">
+          <End Role="question" Type="Self.question" Multiplicity="0..1" />
+          <End Role="correct_answer" Type="Self.correct_answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="correct_answer">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__question__test_i__4D94879B">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__role__3B75D760">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacher_s__subje__45F365D3">
+          <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
+          <End Role="teacher_subject" Type="Self.teacher_subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teacher_subject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test__subject_id__4AB81AF0">
+          <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacher_s__teach__44FF419A">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="teacher_subject" Type="Self.teacher_subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="teacher_subject">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__test__created_by__48CFD27E">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestMasterdDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="answer_option" EntityType="Self.answer_option" />
+          <EntitySet Name="assigned_test" EntityType="Self.assigned_test" />
+          <EntitySet Name="classes" EntityType="Self.class" />
+          <EntitySet Name="correct_answer" EntityType="Self.correct_answer" />
+          <EntitySet Name="questions" EntityType="Self.question" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="subjects" EntityType="Self.subject" />
+          <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" />
+          <EntitySet Name="tests" EntityType="Self.test" />
+          <EntitySet Name="test_result" EntityType="Self.test_result" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__answer_op__quest__5070F446" Association="Self.FK__answer_op__quest__5070F446">
+            <End Role="question" EntitySet="questions" />
+            <End Role="answer_option" EntitySet="answer_option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__correct_a__corre__5441852A" Association="Self.FK__correct_a__corre__5441852A">
+            <End Role="answer_option" EntitySet="answer_option" />
+            <End Role="correct_answer" EntitySet="correct_answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assigned___assig__5812160E" Association="Self.FK__assigned___assig__5812160E">
+            <End Role="user" EntitySet="users" />
+            <End Role="assigned_test" EntitySet="assigned_test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assigned___assig__59063A47" Association="Self.FK__assigned___assig__59063A47">
+            <End Role="user" EntitySet="users" />
+            <End Role="assigned_test" EntitySet="assigned_test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__assigned___test___571DF1D5" Association="Self.FK__assigned___test___571DF1D5">
+            <End Role="test" EntitySet="tests" />
+            <End Role="assigned_test" EntitySet="assigned_test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test_resu__assig__5CD6CB2B" Association="Self.FK__test_resu__assig__5CD6CB2B">
+            <End Role="assigned_test" EntitySet="assigned_test" />
+            <End Role="test_result" EntitySet="test_result" />
+          </AssociationSet>
+          <AssociationSet Name="FK__subject__class_i__4222D4EF" Association="Self.FK__subject__class_i__4222D4EF">
+            <End Role="class" EntitySet="classes" />
+            <End Role="subject" EntitySet="subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__correct_a__quest__534D60F1" Association="Self.FK__correct_a__quest__534D60F1">
+            <End Role="question" EntitySet="questions" />
+            <End Role="correct_answer" EntitySet="correct_answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__question__test_i__4D94879B" Association="Self.FK__question__test_i__4D94879B">
+            <End Role="test" EntitySet="tests" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__role__3B75D760" Association="Self.FK__user__role__3B75D760">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher_s__subje__45F365D3" Association="Self.FK__teacher_s__subje__45F365D3">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="teacher_subject" EntitySet="teacher_subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test__subject_id__4AB81AF0" Association="Self.FK__test__subject_id__4AB81AF0">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="test" EntitySet="tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher_s__teach__44FF419A" Association="Self.FK__teacher_s__teach__44FF419A">
+            <End Role="user" EntitySet="users" />
+            <End Role="teacher_subject" EntitySet="teacher_subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__test__created_by__48CFD27E" Association="Self.FK__test__created_by__48CFD27E">
+            <End Role="user" EntitySet="users" />
+            <End Role="test" EntitySet="tests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestMasterdDBModelStoreContainer" CdmEntityContainer="TestMasterdDBEntities">
+          <EntitySetMapping Name="answer_option">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.answer_option">
+              <MappingFragment StoreEntitySet="answer_option">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="answer_text" ColumnName="answer_text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="assigned_test">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.assigned_test">
+              <MappingFragment StoreEntitySet="assigned_test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="assigned_by" ColumnName="assigned_by" />
+                <ScalarProperty Name="assigned_to" ColumnName="assigned_to" />
+                <ScalarProperty Name="attempts_allowed" ColumnName="attempts_allowed" />
+                <ScalarProperty Name="assigned_at" ColumnName="assigned_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="classes">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.class">
+              <MappingFragment StoreEntitySet="class">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="correct_answer">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.correct_answer">
+              <MappingFragment StoreEntitySet="correct_answer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="correct_option_id" ColumnName="correct_option_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="question_text" ColumnName="question_text" />
+                <ScalarProperty Name="hint" ColumnName="hint" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="question_type" ColumnName="question_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.subject">
+              <MappingFragment StoreEntitySet="subject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="class_id" ColumnName="class_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher_subject">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.teacher_subject">
+              <MappingFragment StoreEntitySet="teacher_subject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tests">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="grading_scale" ColumnName="grading_scale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_result">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.test_result">
+              <MappingFragment StoreEntitySet="test_result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="assigned_test_id" ColumnName="assigned_test_id" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="score" ColumnName="score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="TestMasterdDBModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
