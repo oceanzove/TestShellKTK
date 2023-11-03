@@ -3,63 +3,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:TestShellKTK.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
-        <GroupBox Header="Пользаватели">
-            <ListBox Name="lbUsers" Margin="10">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <Run Text="Имя пользователя:" />
-                            <Run Text="{Binding Username}" />
-                            <LineBreak />
-                            <Run Text="Пароль:" />
-                            <Run Text="{Binding Password}" />
-                            <LineBreak />
-                            <Run Text="Роль:" />
-                            <Run Text="{Binding UserRole}" />
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </GroupBox>
+        Title="AdminTestShell" Height="600" Width="920"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
 
-        <!-- <GroupBox Grid.Column="1" Header="Редактирование"> -->
-        <!--     <StackPanel Name="spStudentsEditor" IsEnabled="False" DataContext="{Binding Students}"> -->
-        <!-- -->
-        <!--         <TextBox Name="tbStudentUsernameEdit"></TextBox> -->
-        <!--     </StackPanel> -->
-        <!-- </GroupBox> -->
+    <Border Background="{StaticResource colorDark1}"
+            CornerRadius="0 0 20 20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Column="2" Header="Новый пользователь">
-            <StackPanel Margin="10 0" DataContext="{Binding Student}">
-                <Label>Введите имя пользователя:</Label>
-                <TextBox Text="{Binding Username}" Name="tbStudentUsername" />
-                <Label>Введите пароль пользвателя:</Label>
-                <TextBox Text="{Binding Password}" Name="tbStudentPassword" />
-                <Label>Выберите название роли</Label>
-                <ComboBox Name="cbUserRole">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <Run Text="{Binding RoleName}" />
-                            </TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <Button Click="AddUser" Margin="0 20"> Новый пользователь</Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Test Shell"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="22"
+                       Margin="20 0 0 0" />
+
+            <StackPanel Grid.Row="1" Grid.Column="0">
+
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuRadioButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}" />
+                <RadioButton Content="Discovery"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuRadioButtonTheme}"
+                             Command="{Binding DiscoveryViewCommand}" />
+                <RadioButton Content="Featured"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuRadioButtonTheme}" />
+
             </StackPanel>
-        </GroupBox>
-    </Grid>
+
+            <TextBox Width="250"
+                     Style="{StaticResource ModernTextBox}"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"
+                     Grid.Row="0" />
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Margin="10"
+                            Content="{Binding CurrentView}" />
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="0">
+
+                <Button
+                    Content="Выход"
+                    Height="50"
+                    Width="100"
+                    Foreground="White"
+                    FontSize="14"
+                    Click="onClickShutdown"
+                    Style="{StaticResource MenuButtonTheme}">
+
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

@@ -1,33 +1,15 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace TestShellKTK.model;
 
 public class User : INotifyPropertyChanged
 {
+    private string _Password;
 
     private string _Username;
-    public string Username
-    {
-        get => _Username;
-        set => SetField(ref _Username, value);
-    }
-
-    private string _Password;
-    public string Password
-    {
-        get => _Password;
-        set => SetField(ref _Password, value);
-    }
 
     private string _UserRole;
-
-    public string UserRole
-    {
-        get => _UserRole;
-        set => SetField(ref _UserRole, value);
-    }
 
     public User(string username, string password, string userRole)
     {
@@ -36,6 +18,23 @@ public class User : INotifyPropertyChanged
         _UserRole = userRole;
     }
 
+    public string Username
+    {
+        get => _Username;
+        set => SetField(ref _Username, value);
+    }
+
+    public string Password
+    {
+        get => _Password;
+        set => SetField(ref _Password, value);
+    }
+
+    public string UserRole
+    {
+        get => _UserRole;
+        set => SetField(ref _UserRole, value);
+    }
 
 
     public event PropertyChangedEventHandler? PropertyChanged;

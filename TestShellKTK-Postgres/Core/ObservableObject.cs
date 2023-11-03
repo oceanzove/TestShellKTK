@@ -1,23 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace TestShellKTK.model;
+namespace TestShellKTK.Core;
 
-public class Role : INotifyPropertyChanged
+public class ObservableObject : INotifyPropertyChanged
 {
-    private string _RoleName;
-    public string RoleName
-    {
-        get => _RoleName;
-        set => SetField(ref _RoleName, value);
-    }
-
-    public Role(string roleName)
-    {
-        _RoleName = roleName;
-    }
-
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
