@@ -31,7 +31,7 @@ public class DataLoader
     }
     public static ObservableCollection<User> LoadUsers()
     {
-        Students.Clear();
+        Users.Clear();
         NpgsqlCommand command = PostgresRepository.Command("Select username, \"password\", role.role_name From \"user\" " +
                                                            "INNER JOIN role ON \"user\".role = role.id ");
         NpgsqlDataReader reader = command.ExecuteReader();
