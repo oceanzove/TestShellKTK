@@ -17,8 +17,8 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Студенты">
-            <ListBox Name="lbStudents"  Margin="10" ItemsSource="{Binding Students}" >
+        <GroupBox Header="Пользаватели">
+            <ListBox Name="lbUsers"  Margin="10" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -28,8 +28,8 @@
                             <Run Text="Пароль:"/>
                             <Run Text="{Binding Password}"/>
                             <LineBreak/>
-                            <Run Text="Класс:"/>
-                            <Run Text="{Binding NameClass}"/>
+                            <Run Text="Роль:"/>
+                            <Run Text="{Binding UserRole}"/>
                         </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -43,15 +43,23 @@
         <!--     </StackPanel> -->
         <!-- </GroupBox> -->
         
-        <GroupBox Grid.Column="2" Header="Новый студент">
+        <GroupBox Grid.Column="2" Header="Новый пользователь">
             <StackPanel Margin="10 0" DataContext="{Binding Student}">
                 <Label>Введите имя пользователя:</Label>
                 <TextBox Text="{Binding Username}" Name="tbStudentUsername"></TextBox>
                 <Label>Введите пароль пользвателя:</Label>
                 <TextBox Text="{Binding Password}" Name="tbStudentPassword"></TextBox>
-                <Label>Введите название класса</Label>
-                <TextBox Text="{Binding NameClass}" Name="tbStudentNameClass"></TextBox>
-                <Button Click="AddStudent" Margin="0 20"> Новый студент</Button>
+                <Label>Выберите название роли</Label>
+                <ComboBox Name="cbUserRole">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding RoleName}"></Run>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Click="AddUser" Margin="0 20"> Новый пользователь</Button>
             </StackPanel>
         </GroupBox>
     </Grid>
