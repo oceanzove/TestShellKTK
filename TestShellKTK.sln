@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestShellKTK", "TestShellKTK\TestShellKTK.csproj", "{9F452C85-A185-4723-B42D-434E6E35F89C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestShellKTK-Postgres", "TestShellKTK-Postgres\TestShellKTK-Postgres.csproj", "{9F452C85-A185-4723-B42D-434E6E35F89C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
