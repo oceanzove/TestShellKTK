@@ -3,58 +3,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TestShellKTK"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <GroupBox Header="Пользаватели">
-            <ListBox Name="lbUsers"  Margin="10" >
+            <ListBox Name="lbUsers" Margin="10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
-                            <Run Text="Имя пользователя:"/>
-                            <Run Text="{Binding Username}"/>
-                            <LineBreak/>
-                            <Run Text="Пароль:"/>
-                            <Run Text="{Binding Password}"/>
-                            <LineBreak/>
-                            <Run Text="Роль:"/>
-                            <Run Text="{Binding UserRole}"/>
+                            <Run Text="Имя пользователя:" />
+                            <Run Text="{Binding Username}" />
+                            <LineBreak />
+                            <Run Text="Пароль:" />
+                            <Run Text="{Binding Password}" />
+                            <LineBreak />
+                            <Run Text="Роль:" />
+                            <Run Text="{Binding UserRole}" />
                         </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
-        
+
         <!-- <GroupBox Grid.Column="1" Header="Редактирование"> -->
         <!--     <StackPanel Name="spStudentsEditor" IsEnabled="False" DataContext="{Binding Students}"> -->
         <!-- -->
         <!--         <TextBox Name="tbStudentUsernameEdit"></TextBox> -->
         <!--     </StackPanel> -->
         <!-- </GroupBox> -->
-        
+
         <GroupBox Grid.Column="2" Header="Новый пользователь">
             <StackPanel Margin="10 0" DataContext="{Binding Student}">
                 <Label>Введите имя пользователя:</Label>
-                <TextBox Text="{Binding Username}" Name="tbStudentUsername"></TextBox>
+                <TextBox Text="{Binding Username}" Name="tbStudentUsername" />
                 <Label>Введите пароль пользвателя:</Label>
-                <TextBox Text="{Binding Password}" Name="tbStudentPassword"></TextBox>
+                <TextBox Text="{Binding Password}" Name="tbStudentPassword" />
                 <Label>Выберите название роли</Label>
                 <ComboBox Name="cbUserRole">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
-                                <Run Text="{Binding RoleName}"></Run>
+                                <Run Text="{Binding RoleName}" />
                             </TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
