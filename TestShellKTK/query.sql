@@ -87,3 +87,8 @@ CREATE TABLE test_result (
                              end_time TIMESTAMP,
                              score FLOAT
 );
+
+insert into role (role_name) values ('student');
+insert into role (role_name) values ('teacher');
+insert into role (role_name) values ('head teacher');
+insert into role (role_name) values ('admin');
