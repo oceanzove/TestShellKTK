@@ -4,36 +4,36 @@ using System.Runtime.CompilerServices;
 
 namespace TestShellKTK.model;
 
-public class Student : INotifyPropertyChanged
+public class User : INotifyPropertyChanged
 {
 
-    private string _username;
+    private string _Username;
     public string Username
     {
-        get => _username;
-        set => SetField(ref _username, value);
+        get => _Username;
+        set => SetField(ref _Username, value);
     }
 
-    private string _password;
+    private string _Password;
     public string Password
     {
-        get => _password;
-        set => SetField(ref _password, value);
+        get => _Password;
+        set => SetField(ref _Password, value);
     }
 
-    private string _NameClass;
+    private string _UserRole;
 
-    public string NameClass
+    public string UserRole
     {
-        get => _NameClass;
-        set => SetField(ref _NameClass, value);
+        get => _UserRole;
+        set => SetField(ref _UserRole, value);
     }
 
-    public Student(string username, string password, string nameClass)
+    public User(string username, string password, string userRole)
     {
-        Username = username;
-        Password = password;
-        NameClass = nameClass;
+        _Username = username;
+        _Password = password;
+        _UserRole = userRole;
     }
 
 

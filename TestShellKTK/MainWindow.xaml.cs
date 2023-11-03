@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Data;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,37 +21,46 @@ namespace TestShellKTK;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public ObservableCollection<Student> Students { get; set; } = new ObservableCollection<Student>();
-
+    //TODO передлать базу
     public MainWindow()
     {
         InitializeComponent();
-        PostgresRepository.Connect("localhost", "5432", "postgres", "1234", "TestMasterDB");
+        PostgresRepository.Connect("localhost", "5432", "postgres", "1234", "AnotherTestMasterDB");
         DataContext = this;
 
-        DataLoader.LoadStudents();
+        // Заполняет ComboBox Ролями
+        Binding roles = new Binding();
+        roles.Source = DataLoader.LoadRoles();
+        cbUserRole.SetBinding(ComboBox.ItemsSourceProperty, roles);
+        
+        
+        // Заполняет ListBox пользвателями
+        Binding students = new Binding();
+        students.Source = DataLoader.LoadUsers();
+        lbUsers.SetBinding(ListBox.ItemsSourceProperty, students);
     }
 
-    
 
-    private void AddStudent(object sender, RoutedEventArgs e)
+    private void AddUser(object sender, RoutedEventArgs e)
     {
         //TODO сделай try_catch
         
+        string Username = tbStudentUsername.Text.Trim();
+        string Password = tbStudentPassword.Text.Trim();
+        Role selectedItem = cbUserRole.SelectedItem as Role;
+        string UserRole = selectedItem.RoleName;
         
-        string StudentUsername = tbStudentUsername.Text.Trim();
-        string StudentPassword = tbStudentPassword.Text.Trim();
-        string StudentNameClass = tbStudentNameClass.Text.Trim();
+        // string UserRole = cbUserRole.SelectedItem.ToString();
 
-        NpgsqlCommand command = PostgresRepository.Command("INSERT INTO student (username, password, class_id) " +
-                                                           "VALUES (@username, @password, (SELECT id FROM class WHERE name = @nameClass))");
-        command.Parameters.AddWithValue("@username", NpgsqlDbType.Varchar, StudentUsername);
-        command.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, StudentPassword);
-        command.Parameters.AddWithValue("@nameClass", NpgsqlDbType.Varchar, StudentNameClass);
+        NpgsqlCommand command = PostgresRepository.Command("INSERT INTO \"user\" (username, password, role) " +
+                                                           "VALUES (@username, @password, (SELECT id FROM role WHERE role_name = @UserRole))");
+        command.Parameters.AddWithValue("@username", NpgsqlDbType.Varchar, Username);
+        command.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, Password);
+        command.Parameters.AddWithValue("@UserRole", NpgsqlDbType.Varchar, UserRole);
         var result = command.ExecuteNonQuery();
         tbStudentUsername.Clear();
         tbStudentPassword.Clear();
-        tbStudentNameClass.Clear();
-        DataLoader.LoadStudents();
+        cbUserRole.SelectedIndex = -1;
+        DataLoader.LoadUsers();
     }
 }
