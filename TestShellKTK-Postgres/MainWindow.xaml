@@ -91,7 +91,7 @@
                     FontFamily="Arial"
                     FontSize="14"
                     Click="onClickShutdown"
-                    Style="{StaticResource MenuButtonTheme}">
+                    Style="{StaticResource MenuExitButtonTheme}">
 
                 </Button>
             </StackPanel>

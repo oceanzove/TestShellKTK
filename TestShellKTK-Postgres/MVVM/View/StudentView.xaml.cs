@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using Npgsql;
 using NpgsqlTypes;
 using TestShellKTK.model;
@@ -21,7 +22,7 @@ public partial class StudentView : UserControl
         
     }
     
-    private void AddStudent(object sender, RoutedEventArgs e)
+    private void AddUser(object sender, RoutedEventArgs e)
     {
         //TODO сделай try_catch
         //TODO сделай валидацию даных проверку на заполненость фио
@@ -41,9 +42,10 @@ public partial class StudentView : UserControl
         DataLoader.LoadStudents();
     }
     
-    private void CurrentStudentEdit(object sender, SelectionChangedEventArgs e)
+    private void onChangeUser(object sender, SelectionChangedEventArgs e)
     {
-        spStudentsEditor.IsEnabled = true;
+        spStudentsEditor.IsEnabled = lbUsers.SelectedItem != null;
+        bRemoveUser.IsEnabled = lbUsers.SelectedItem != null;
     }
     
     
@@ -67,5 +69,25 @@ public partial class StudentView : UserControl
             MessageBox.Show("somme errors here " + ex.Message);
         }
         DataLoader.LoadStudents();
+    }
+
+    private void OnClickRemoveUser(object sender, RoutedEventArgs e)
+    {
+            try
+            {
+                
+                var id = (lbUsers.SelectedItem as User).id;
+                var command = PostgresRepository.Command("DELETE FROM \"user\" WHERE id = @id");
+                command.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, id);
+                int result = command.ExecuteNonQuery();
+
+                DataLoader.LoadStudents();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        
     }
 }
