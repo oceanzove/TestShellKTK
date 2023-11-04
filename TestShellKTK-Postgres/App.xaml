@@ -10,6 +10,9 @@
                     <ResourceDictionary Source="Theme/MenuRadioButtonTheme.xaml"></ResourceDictionary>
                     <ResourceDictionary Source="Theme/TextBoxTheme.xaml"></ResourceDictionary>
                     <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"></ResourceDictionary>
+                    <ResourceDictionary Source="Theme/ListBoxTheme.xaml"></ResourceDictionary>
+                    <ResourceDictionary Source="Theme/ListBoxItemTheme.xaml"></ResourceDictionary>
+                    <ResourceDictionary Source="Theme/UserListBoxTheme.xaml"></ResourceDictionary>
                 </ResourceDictionary.MergedDictionaries>
                 
                 <SolidColorBrush x:Key="colorDark3" Color="#3f474f"/>

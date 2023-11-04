@@ -7,7 +7,7 @@ public class GenerateUsername
     public static string GetUsername(string fullName)
     {
         var words = fullName.Split(' ');
-
+        
         var username = words[0].ToLower() + new Random().Next(1000, 9999).ToString();
 
         var command = PostgresRepository.Command("SELECT COUNT(*) FROM \"user\" WHERE username = @username");
