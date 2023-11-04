@@ -5,51 +5,48 @@
              xmlns:view="clr-namespace:TestShellKTK.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-            <ResourceDictionary>
-                
-                <SolidColorBrush x:Key="colorDark3" Color="#3f474f"/>
-                <SolidColorBrush x:Key="colorDark2" Color="#2f373f"/>
-                <SolidColorBrush x:Key="colorDark1" Color="#1f272f"/>
-                <SolidColorBrush x:Key="colorDark" Color="#070f17"/>
-                <SolidColorBrush x:Key="colorLight3" Color="#bfc7cf"/>
-                <SolidColorBrush x:Key="colorLight2" Color="#cfd7df"/>
-                <SolidColorBrush x:Key="colorLight1" Color="#dfe7ef"/>
-                <SolidColorBrush x:Key="colorLight" Color="#eff7ff"/>
-                <SolidColorBrush x:Key="colorOrange" Color="#FFFF851A"/>
-                <SolidColorBrush x:Key="colorPink" Color="#FFFF3EB8"/>
-                <SolidColorBrush x:Key="colorRed" Color="#FFFF5454"/>
-                <SolidColorBrush x:Key="colorPurple" Color="#FFB161FF"/>
-                <SolidColorBrush x:Key="colorDarkBlue" Color="#FF002F73"/>
-                <SolidColorBrush x:Key="colorBlue" Color="#FF3095FB"/>
-                <SolidColorBrush x:Key="colorCyan" Color="#FF00AFDC"/>
-                <SolidColorBrush x:Key="colorGreen" Color="#FF0CC76B"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuRadioButtonTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/MenuExitButtonTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/CustomThumbTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/CustomScrollBarTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/ListBoxTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/ListBoxItemTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/UserListBoxTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Theme/MenuRemoveButtonTheme.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <SolidColorBrush x:Key="colorDark3" Color="#3f474f" />
+            <SolidColorBrush x:Key="colorDark2" Color="#2f373f" />
+            <SolidColorBrush x:Key="colorDark1" Color="#1f272f" />
+            <SolidColorBrush x:Key="colorDark" Color="#070f17" />
+            <SolidColorBrush x:Key="colorLight3" Color="#bfc7cf" />
+            <SolidColorBrush x:Key="colorLight2" Color="#cfd7df" />
+            <SolidColorBrush x:Key="colorLight1" Color="#dfe7ef" />
+            <SolidColorBrush x:Key="colorLight" Color="#eff7ff" />
+            <SolidColorBrush x:Key="colorOrange" Color="#FFFF851A" />
+            <SolidColorBrush x:Key="colorPink" Color="#FFFF3EB8" />
+            <SolidColorBrush x:Key="colorRed" Color="#FFFF5454" />
+            <SolidColorBrush x:Key="colorPurple" Color="#FFB161FF" />
+            <SolidColorBrush x:Key="colorDarkBlue" Color="#FF002F73" />
+            <SolidColorBrush x:Key="colorBlue" Color="#FF3095FB" />
+            <SolidColorBrush x:Key="colorCyan" Color="#FF00AFDC" />
+            <SolidColorBrush x:Key="colorGreen" Color="#FF0CC76B" />
 
-                <SolidColorBrush x:Key="colorDarkA1" Color="#20eff7ff"/>
-                <Color x:Key="ccolorDarkA1">#20eff7ff</Color>
-                <SolidColorBrush x:Key="colorDarkA2" Color="#10eff7ff"/>
-                
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="Theme/MenuRadioButtonTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/TextBoxTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/MenuExitButtonTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/CustomThumbTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/CustomScrollBarTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/ListBoxTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/ListBoxItemTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/UserListBoxTheme.xaml"></ResourceDictionary>
-                    <ResourceDictionary Source="Theme/MenuRemoveButtonTheme.xaml"></ResourceDictionary>
-                </ResourceDictionary.MergedDictionaries>
-                
-                
+            <SolidColorBrush x:Key="colorDarkA1" Color="#20eff7ff" />
+            <SolidColorBrush x:Key="colorDarkA2" Color="#10eff7ff" />
 
-                
-                <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
-                    <view:StudentView/>
-                </DataTemplate>
-                
-                <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
-                    <view:TeacherView/>
-                </DataTemplate>
-            </ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+                <view:StudentView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
+                <view:TeacherView />
+            </DataTemplate>
+
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

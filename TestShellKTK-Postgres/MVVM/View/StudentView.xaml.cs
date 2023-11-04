@@ -56,7 +56,6 @@ public partial class StudentView : UserControl
 
     private void SaveEditionsButton(object sender, RoutedEventArgs e)
     {
-        spStudentsEditor.IsEnabled = false;
         try
         {
             var selectedUser = lbUsers.SelectedItem as User;
@@ -93,5 +92,11 @@ public partial class StudentView : UserControl
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    private void onInputFullName(object sender, TextChangedEventArgs e)
+    {
+        var words = tbStudentFullname.Text.Trim().Split(' ');
+        bAddUser.IsEnabled = words.Length == 3 && words.All(word => word.Length >= 2);
     }
 }

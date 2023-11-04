@@ -4,7 +4,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Rectangle Fill="{StaticResource colorDarkA1}" RadiusX="10" RadiusY="10"/>
+                    <Rectangle Fill="#1f272f" RadiusX="10" RadiusY="10"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
