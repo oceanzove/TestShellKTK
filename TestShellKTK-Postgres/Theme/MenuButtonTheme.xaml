@@ -10,7 +10,7 @@
                         <Border Name="Border"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
-                                CornerRadius="5"
+                                CornerRadius="10"
                                 Background="{TemplateBinding Background}">
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
@@ -20,15 +20,41 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style.Setters>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#20eff7ff"></Setter>
-            </Trigger>
+            <!-- Реализует изменение цвета кнопки при наведение на неё курсором -->
+            <EventTrigger RoutedEvent="MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="Background.Color">
+                            <ColorAnimation To="#20eff7ff" Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <!-- Реализует изменение цвета кнопки при выведение курсора из облости кнопки -->
+            <EventTrigger RoutedEvent="MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard Storyboard.TargetProperty="Background.Color">
+                            <ColorAnimation To="Transparent" Duration="0:0:0.2"></ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <!-- <Trigger Property="IsMouseOver" Value="True"> -->
+            <!--     <EventTrigger.Actions> -->
+            <!--         <BeginStoryboard> -->
+            <!--             <Storyboard Storyboard.TargetProperty="Background.Color"> -->
+            <!--                 <ColorAnimation To="Red" Duration="0:0:0:5"></ColorAnimation> -->
+            <!--             </Storyboard> -->
+            <!--         </BeginStoryboard> -->
+            <!--     </EventTrigger.Actions> -->
+            <!--     ~1~ <Setter Property="Background" Value="#20eff7ff"></Setter> @1@ -->
+            <!-- </Trigger> -->
         </Style.Triggers>
-        
     </Style>
 </ResourceDictionary>

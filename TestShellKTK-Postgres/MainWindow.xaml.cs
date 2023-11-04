@@ -11,7 +11,6 @@ namespace TestShellKTK;
 /// </summary>
 public partial class MainWindow : Window
 {
-    //TODO передлать базу
     public MainWindow()
     {
         InitializeComponent();
