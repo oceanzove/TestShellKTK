@@ -49,7 +49,7 @@ public partial class StudentView : UserControl
 
     private void onChangeUser(object sender, SelectionChangedEventArgs e)
     {
-        spStudentsEditor.IsEnabled = lbUsers.SelectedItem != null;
+        gStudentEditor.IsEnabled = lbUsers.SelectedItem != null;
         bRemoveUser.IsEnabled = lbUsers.SelectedItem != null;
     }
 

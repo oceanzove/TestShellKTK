@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
-           x:Key="MenuRemoveButtonTheme">
+           x:Key="MenuButtonTheme">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
@@ -10,7 +10,7 @@
                         <Border Name="Border"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
-                                CornerRadius="10"
+                                CornerRadius="15"
                                 Background="{TemplateBinding Background}">
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"

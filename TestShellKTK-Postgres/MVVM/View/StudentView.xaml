@@ -11,14 +11,15 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
+
+            <!-- Лист бокс юзеров -->
             <Border Grid.Row="0" Grid.Column="0"
                     Margin="10"
                     BorderBrush="{StaticResource colorDarkA1}"
@@ -34,12 +35,13 @@
                     </ListBox.Resources>
                 </ListBox>
             </Border>
-            <Border Margin="10 8" Grid.Row="1" Grid.Column="0"
+            <!-- Кнопка удалить -->
+            <Border Margin="10 0 10 10" Grid.Row="1"
                     BorderBrush="{StaticResource colorDarkA1}"
                     BorderThickness="1"
-                    CornerRadius="10">
+                    CornerRadius="15">
                 <Button Content="Remove"
-                        Style="{StaticResource MenuRemoveButtonTheme}"
+                        Style="{StaticResource MenuButtonTheme}"
                         Foreground="White"
                         Name="bRemoveUser"
                         IsEnabled="False"
@@ -49,22 +51,78 @@
             </Border>
 
 
-            <StackPanel Grid.Column="1" Name="spStudentsEditor" IsEnabled="False" DataContext="{Binding Students}"
-                        Margin="10,0,10,0">
-                <Label>Введите фио студента</Label>
-                <TextBox Name="tbStudentFullNameEdit"
-                         Text="{Binding ElementName=lbUsers, Path=SelectedItem.fullName, UpdateSourceTrigger=LostFocus}">
-                </TextBox>
-                <Button Click="SaveEditionsButton" Grid.Column="1" Grid.Row="2" Margin="0,20">Сохранить</Button>
-            </StackPanel>
+            <!-- Сетка с панелью управления -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                
+                <!-- Панель изменение фио юзера -->
+                <Border Grid.Row="0"
+                        Margin="10"
+                        BorderBrush="{StaticResource colorDarkA1}"
+                        BorderThickness="1"
+                        CornerRadius="20">
+                    <Grid DataContext="{Binding Students}"
+                          IsEnabled="False"
+                          Name="gStudentEditor"
+                          Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <Label Foreground="White" >Enter full name</Label>
+                            <TextBox Name="tbStudentFullNameEdit"
+                                     Foreground="White"
+                                     Text="{Binding ElementName=lbUsers, Path=SelectedItem.fullName, UpdateSourceTrigger=LostFocus}"
+                                     Style="{StaticResource InputTextBox}" />
+                        </StackPanel>
+                        <Border Grid.Row="1" BorderBrush="{StaticResource colorDarkA1}"
+                                BorderThickness="1"
+                                CornerRadius="15">
+                            <Button Click="SaveEditionsButton"
+                                    Foreground="White"
+                                    Style="{StaticResource MenuButtonTheme}"
+                                    Content="Save" />
+                        </Border>
+                    </Grid>
+                </Border>
 
-
-            <StackPanel Grid.Column="2" Margin="10 0" DataContext="{Binding Student}">
-                <Label>Введите фио</Label>
-                <TextBox Text="{Binding fullName}" TextChanged="onInputFullName" Name="tbStudentFullname"></TextBox>
-                <Button Name="bAddUser" IsEnabled="False" Click="AddUser" Content="Create user" Margin="0 20"></Button>
-            </StackPanel>
-
+                <!-- Панель добавление юзера -->
+                <Border Grid.Row="1"
+                        Margin="10"
+                        BorderBrush="{StaticResource colorDarkA1}"
+                        BorderThickness="1"
+                        CornerRadius="20">
+                    <Grid DataContext="{Binding Students}"
+                          Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <Label Foreground="White">Enter full name</Label>
+                            <TextBox TextChanged="onInputFullName"
+                                     Foreground="White"
+                                     Name="tbStudentFullname"
+                                     Style="{StaticResource InputTextBox}" />
+                        </StackPanel>
+                        <Border Grid.Row="1" BorderBrush="{StaticResource colorDarkA1}"
+                                BorderThickness="1"
+                                CornerRadius="15">
+                            <Button Name="bAddUser" IsEnabled="False"
+                                    Click="AddUser"
+                                    Foreground="White"
+                                    Content="Create user"
+                                    Style="{StaticResource MenuButtonTheme}">
+                            </Button>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

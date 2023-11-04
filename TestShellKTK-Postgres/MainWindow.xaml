@@ -63,7 +63,7 @@
             </StackPanel>
 
             <TextBox Width="250"
-                     Style="{StaticResource ModernTextBox}"
+                     Style="{StaticResource SearchTextBox}"
                      Height="40"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
