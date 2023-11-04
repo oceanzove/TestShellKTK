@@ -29,7 +29,7 @@
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetProperty="Background.Color">
-                            <ColorAnimation To="#20eff7ff" Duration="0:0:0.5" />
+                            <ColorAnimation To="#20eff7ff" Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -39,7 +39,7 @@
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetProperty="Background.Color">
-                            <ColorAnimation To="Transparent" Duration="0:0:0.2"></ColorAnimation>
+                            <ColorAnimation To="Transparent" Duration="0:0:0.1"></ColorAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>

@@ -31,10 +31,10 @@
 
             <TextBlock Text="Test Shell"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
+                       HorizontalAlignment="Center"
                        Foreground="White"
                        FontSize="22"
-                       Margin="20 0 0 0" />
+                       Margin="0 0 0 0" />
 
             <StackPanel Grid.Row="1" Grid.Column="0">
 
