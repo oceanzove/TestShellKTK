@@ -5,41 +5,51 @@ namespace TestShellKTK.model;
 
 public class User : INotifyPropertyChanged
 {
-    public int _Id;
-    private string _Password;
+    private int _id;
+    
+    private string _password;
 
-    private string _Username;
+    private string _username;
 
-    private string _UserRole;
+    private string _fullName;
 
-    public User(int id, string username, string password, string userRole)
+    private string _userRole;
+
+    public User(int id, string username, string fullName, string password, string userRole)
     {
-        _Id = id;
-        _Username = username;
-        _Password = password;
-        _UserRole = userRole;
+        _id = id;
+        _username = username;
+        _fullName = fullName;
+        _password = password;
+        _userRole = userRole;
     }
 
-    public int Id
+    public int id
     {
-        get => _Id;
+        get => _id;
     }
-    public string Username
+    public string username
     {
-        get => _Username;
-        set => SetField(ref _Username, value);
-    }
-
-    public string Password
-    {
-        get => _Password;
-        set => SetField(ref _Password, value);
+        get => _username;
+        set => SetField(ref _username, value);
     }
 
-    public string UserRole
+    public string fullName
     {
-        get => _UserRole;
-        set => SetField(ref _UserRole, value);
+        get => _fullName;
+        set => SetField(ref _fullName, value);
+    }
+
+    public string password
+    {
+        get => _password;
+        set => SetField(ref _password, value);
+    }
+
+    public string userRole
+    {
+        get => _userRole;
+        set => SetField(ref _userRole, value);
     }
 
 

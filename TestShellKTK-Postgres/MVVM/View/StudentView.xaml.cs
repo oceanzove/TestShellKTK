@@ -18,33 +18,26 @@ public partial class StudentView : UserControl
         students.Source = DataLoader.LoadStudents();
         lbUsers.SetBinding(ItemsControl.ItemsSourceProperty, students);
 
-        // // Заполняет ComboBox Ролями
-        var roles = new Binding();
-        roles.Source = DataLoader.LoadRoles();
-        cbUserRole.SetBinding(ItemsControl.ItemsSourceProperty, roles);
         
     }
     
-    private void AddUser(object sender, RoutedEventArgs e)
+    private void AddStudent(object sender, RoutedEventArgs e)
     {
         //TODO сделай try_catch
+        //TODO сделай валидацию даных проверку на заполненость фио
+        var fullName = tbStudentFullname.Text.Trim();
+        var username = GenerateUsername.GetUsername(fullName);
+        var password = GeneratePassword.GetPassword(10);
+        var role = "student";
         
-        var Username = tbStudentUsername.Text.Trim();
-        var Password = tbStudentPassword.Text.Trim();
-        var selectedItem = cbUserRole.SelectedItem as Role;
-        var UserRole = selectedItem.RoleName;
-        
-        // string UserRole = cbUserRole.SelectedItem.ToString();
-        
-        var command = PostgresRepository.Command("INSERT INTO \"user\" (username, password, role) " +
-                                                 "VALUES (@username, @password, (SELECT id FROM role WHERE role_name = @UserRole))");
-        command.Parameters.AddWithValue("@username", NpgsqlDbType.Varchar, Username);
-        command.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, Password);
-        command.Parameters.AddWithValue("@UserRole", NpgsqlDbType.Varchar, UserRole);
+        var command = PostgresRepository.Command("INSERT INTO \"user\" (username, fullname, password, role) " +
+                                                 "VALUES (@username, @fullName, @password, (SELECT id FROM role WHERE role_name = @UserRole))");
+        command.Parameters.AddWithValue("@username", NpgsqlDbType.Varchar, username);
+        command.Parameters.AddWithValue("@fullName", NpgsqlDbType.Varchar, fullName);
+        command.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+        command.Parameters.AddWithValue("@UserRole", NpgsqlDbType.Varchar, role);
         var result = command.ExecuteNonQuery();
-        tbStudentUsername.Clear();
-        tbStudentPassword.Clear();
-        cbUserRole.SelectedIndex = -1;
+        tbStudentFullname.Clear();
         DataLoader.LoadStudents();
     }
     
@@ -60,15 +53,12 @@ public partial class StudentView : UserControl
         try
         {
             var selectedUser = lbUsers.SelectedItem as User;
-            int id = selectedUser.Id;
-            string username = tbStudentUsernameEdit.Text.Trim();
-            string password = tbStudentPasswordEdit.Text.Trim();
+            int id = selectedUser.id;
+            string fullName = tbStudentFullNameEdit.Text.Trim();
 
-            NpgsqlCommand command = PostgresRepository.Command("UPDATE \"user\" SET username = @username,password = @password " +
-                                                               "WHERE id = @id");
-            command.Parameters.AddWithValue("@username", NpgsqlDbType.Varchar, username);
+            NpgsqlCommand command = PostgresRepository.Command("UPDATE \"user\" SET fullname = @fullName WHERE id = @id");
             command.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, id);
-            command.Parameters.AddWithValue("@password", NpgsqlDbType.Varchar, password);
+            command.Parameters.AddWithValue("@fullName", NpgsqlDbType.Varchar, fullName);
             
             int result = command.ExecuteNonQuery();
         }

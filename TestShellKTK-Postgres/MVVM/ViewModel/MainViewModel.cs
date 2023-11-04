@@ -26,7 +26,7 @@ public class MainViewModel : ObservableObject
     {
         StudentVM = new StudentViewModel();
         TeacherVM = new TeacherViewModel();
-        CurrentView = StudentVM;
+        CurrentView = TeacherVM;
 
         StudentViewCommand = new RelayCommand((O => CurrentView = StudentVM));
         TeacherViewCommand = new RelayCommand(o => CurrentView = TeacherVM);

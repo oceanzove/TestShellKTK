@@ -40,24 +40,25 @@
 
             <StackPanel Grid.Row="1" Grid.Column="0">
 
-                <RadioButton Content="Student"
+                
+                <RadioButton Content="Teachers"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuRadioButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding StudentViewCommand}" />
-                <RadioButton Content="Teacher"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuRadioButtonTheme}"
                              Command="{Binding TeacherViewCommand}" />
-                <RadioButton Content="Featured"
+                <RadioButton Content="Heads"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuRadioButtonTheme}" />
+                <RadioButton Content="Students"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuRadioButtonTheme}"
+                             Command="{Binding StudentViewCommand}" />
 
             </StackPanel>
 
@@ -83,7 +84,7 @@
                         Margin="0">
 
                 <Button
-                    Content="Выход"
+                    Content="Exit"
                     Height="50"
                     Width="100"
                     Foreground="White"

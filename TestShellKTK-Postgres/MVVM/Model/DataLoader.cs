@@ -9,26 +9,7 @@ public class DataLoader
     public static ObservableCollection<User> Teachers { get; set; } = new();
     public static ObservableCollection<User> Users { get; set; } = new();
 
-    public static ObservableCollection<Role> Roles { get; set; } = new();
 
-
-    public static ObservableCollection<Role> LoadRoles()
-    {
-        Roles.Clear();
-        var command = PostgresRepository.Command("Select role_name FROM role");
-        var reader = command.ExecuteReader();
-
-        if (reader.HasRows)
-            while (reader.Read())
-            {
-                var roleName = reader.GetString(0);
-
-                Roles.Add(new Role(roleName));
-            }
-
-        reader.Close();
-        return Roles;
-    }
 
     // public static ObservableCollection<User> LoadUsers()
     // {
@@ -53,7 +34,7 @@ public class DataLoader
     public static ObservableCollection<User> LoadStudents()
     {
         Students.Clear();
-        var command = PostgresRepository.Command("Select \"user\".id, username, \"password\", role.role_name From \"user\" " +
+        var command = PostgresRepository.Command("Select \"user\".id, username, fullname , \"password\", role.role_name From \"user\" " +
                                                  "INNER JOIN role ON \"user\".role = role.id " +
                                                  "WHERE role.role_name = 'student'");
         var reader = command.ExecuteReader();
@@ -62,10 +43,11 @@ public class DataLoader
             {
                 var id = reader.GetInt16(0);
                 var username = reader.GetString(1);
-                var password = reader.GetString(2);
-                var userRole = reader.GetString(3);
+                var fullName = reader.GetString(2);
+                var password = reader.GetString(3);
+                var userRole = reader.GetString(4);
 
-                Students.Add(new User(id, username, password, userRole));
+                Students.Add(new User(id, username, fullName , password, userRole));
             }
 
         reader.Close();
@@ -75,7 +57,7 @@ public class DataLoader
     public static ObservableCollection<User> LoadTeachers()
     {
         Teachers.Clear();
-        var command = PostgresRepository.Command("Select \"user\".id, username, \"password\", role.role_name From \"user\" " +
+        var command = PostgresRepository.Command("Select \"user\".id, username, fullname, \"password\", role.role_name From \"user\" " +
                                                  "INNER JOIN role ON \"user\".role = role.id " +
                                                  "WHERE role.role_name = 'teacher'");
     
@@ -86,10 +68,11 @@ public class DataLoader
             {
                 var id = reader.GetInt16(0);
                 var username = reader.GetString(1);
-                var password = reader.GetString(2);
-                var userRole = reader.GetString(3);
+                var fullName = reader.GetString(2);
+                var password = reader.GetString(3);
+                var userRole = reader.GetString(4);
     
-                Teachers.Add(new User(id, username, password, userRole));
+                Teachers.Add(new User(id, username, fullName , password, userRole));
             }
         }
     

@@ -1,4 +1,7 @@
-﻿-- Создание таблицы роли
+﻿
+
+
+-- Создание таблицы роли
 CREATE TABLE role
 (
     id        serial PRIMARY KEY,
@@ -10,6 +13,7 @@ CREATE TABLE "user"
 (
     id       SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE           NOT NULL,
+    fullName VARCHAR(90)                  NOT NULL,
     password VARCHAR(50)                  NOT NULL,
     role     INTEGER REFERENCES role (id) NOT NULL
 );
