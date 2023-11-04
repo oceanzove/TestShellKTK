@@ -5,19 +5,25 @@ namespace TestShellKTK.model;
 
 public class User : INotifyPropertyChanged
 {
+    public int _Id;
     private string _Password;
 
     private string _Username;
 
     private string _UserRole;
 
-    public User(string username, string password, string userRole)
+    public User(int id, string username, string password, string userRole)
     {
+        _Id = id;
         _Username = username;
         _Password = password;
         _UserRole = userRole;
     }
 
+    public int Id
+    {
+        get => _Id;
+    }
     public string Username
     {
         get => _Username;
