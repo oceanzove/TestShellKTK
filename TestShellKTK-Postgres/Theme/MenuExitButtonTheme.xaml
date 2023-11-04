@@ -29,7 +29,7 @@
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard Storyboard.TargetProperty="Background.Color">
-                            <ColorAnimation To="#20eff7ff" Duration="0:0:0.1" />
+                            <ColorAnimation To="{StaticResource ccolorDarkA1}" Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
