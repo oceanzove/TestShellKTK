@@ -1,6 +1,8 @@
 ﻿<Application x:Class="TestShellKTK.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="clr-namespace:TestShellKTK.MVVM.ViewModel"
+             xmlns:view="clr-namespace:TestShellKTK.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
             <ResourceDictionary>
@@ -31,13 +33,13 @@
                 <SolidColorBrush x:Key="colorDarkA2" Color="#10eff7ff"/>
 
                 
-                <!-- <DataTemplate DataType="{x:Type viewModel:HomeViewModel}"> -->
-                <!--     <view:HomeView/> -->
-                <!-- </DataTemplate> -->
-                <!-- -->
-                <!-- <DataTemplate DataType="{x:Type viewModel:DiscoveryViewModel}"> -->
-                <!--     <view:DiscoveryView/> -->
-                <!-- </DataTemplate> -->
+                <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+                    <view:StudentView/>
+                </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
+                    <view:TeacherView/>
+                </DataTemplate>
             </ResourceDictionary>
     </Application.Resources>
 </Application>

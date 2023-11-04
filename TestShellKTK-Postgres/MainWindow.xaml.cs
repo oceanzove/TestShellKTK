@@ -15,7 +15,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         PostgresRepository.Connect("localhost", "5432", "postgres", "1234", "AnotherTestMasterDB");
-        DataContext = this;
         //
         // // Заполняет ComboBox Ролями
         // var roles = new Binding();
