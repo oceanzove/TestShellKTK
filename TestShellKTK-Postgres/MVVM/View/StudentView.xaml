@@ -58,7 +58,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
+
                 <!-- Панель изменение фио юзера -->
                 <Border Grid.Row="0"
                         Margin="10"
@@ -74,7 +74,7 @@
                             <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0">
-                            <Label Foreground="White" >Enter full name</Label>
+                            <Label Foreground="White">Enter full name</Label>
                             <TextBox Name="tbStudentFullNameEdit"
                                      Foreground="White"
                                      Text="{Binding ElementName=lbUsers, Path=SelectedItem.fullName, UpdateSourceTrigger=LostFocus}"
@@ -105,10 +105,11 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0">
                             <Label Foreground="White">Enter full name</Label>
-                            <TextBox TextChanged="onInputFullName"
-                                     Foreground="White"
-                                     Name="tbStudentFullname"
-                                     Style="{StaticResource InputTextBox}" />
+                            <TextBox
+                                Style="{StaticResource InputTextBox}"
+                                TextChanged="onInputFullName"
+                                Foreground="White"
+                                Name="tbStudentFullname" />
                         </StackPanel>
                         <Border Grid.Row="1" BorderBrush="{StaticResource colorDarkA1}"
                                 BorderThickness="1"
