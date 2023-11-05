@@ -14,4 +14,9 @@
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-rc.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\Images\DefaultUserIcon.jpg" />
+      <Resource Include="Resources\Images\DefaultUserIcon.jpg" />
+    </ItemGroup>
+
 </Project>

@@ -18,7 +18,7 @@
                 <ResourceDictionary Source="Theme/UserListBoxTheme.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            
+
             <SolidColorBrush x:Key="colorDark3" Color="#3f474f" />
             <SolidColorBrush x:Key="colorDark2" Color="#2f373f" />
             <SolidColorBrush x:Key="colorDark1" Color="#1f272f" />
@@ -47,7 +47,11 @@
                 <view:TeacherView />
             </DataTemplate>
 
-            
+            <DataTemplate DataType="{x:Type viewModel:HeadViewModel}">
+                <view:HeadView />
+            </DataTemplate>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

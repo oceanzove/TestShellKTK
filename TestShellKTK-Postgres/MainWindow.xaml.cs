@@ -11,6 +11,8 @@ namespace TestShellKTK;
 /// </summary>
 public partial class MainWindow : Window
 {
+    
+    //TODO Сделать поиск..
     public MainWindow()
     {
         InitializeComponent();

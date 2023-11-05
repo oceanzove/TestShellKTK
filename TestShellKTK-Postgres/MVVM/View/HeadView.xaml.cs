@@ -1,26 +1,24 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 using Npgsql;
 using NpgsqlTypes;
 using TestShellKTK.model;
 
 namespace TestShellKTK.MVVM.View;
 
-public partial class StudentView : UserControl
+public partial class HeadView : UserControl
 {
-    public StudentView()
+    public HeadView()
     {
         InitializeComponent();
 
-        // Заполняет ListBox пользвателями
-        var students = new Binding();
-        students.Source = DataLoader.LoadStudents();
-        lbUsers.SetBinding(ItemsControl.ItemsSourceProperty, students);
+        Binding heads = new Binding();
+        heads.Source = DataLoader.LoadHeads();
+        lbUsers.SetBinding(ListBox.ItemsSourceProperty, heads);
     }
-
-    private void AddUser(object sender, RoutedEventArgs e)
+    
+     private void AddUser(object sender, RoutedEventArgs e)
     {
         //TODO сделай валидацию даных проверку на заполненость фио
         try
@@ -28,7 +26,7 @@ public partial class StudentView : UserControl
             var fullName = tbUserFullname.Text.Trim();
             var username = GenerateUsername.GetUsername(fullName);
             var password = GeneratePassword.GetPassword(10);
-            var role = "student";
+            var role = "head teacher";
 
             var command = PostgresRepository.Command("INSERT INTO \"user\" (username, fullname, password, role) " +
                                                      "VALUES (@username, @fullName, @password, (SELECT id FROM role WHERE role_name = @UserRole))");
@@ -44,12 +42,12 @@ public partial class StudentView : UserControl
         }
 
         tbUserFullname.Clear();
-        DataLoader.LoadStudents();
+        DataLoader.LoadHeads();
     }
 
     private void onChangeUser(object sender, SelectionChangedEventArgs e)
     {
-        gUserEditor.IsEnabled = lbUsers.SelectedItem != null;
+        gStudentEditor.IsEnabled = lbUsers.SelectedItem != null;
         bRemoveUser.IsEnabled = lbUsers.SelectedItem != null;
     }
 
@@ -74,7 +72,7 @@ public partial class StudentView : UserControl
             MessageBox.Show("somme errors here " + ex.Message);
         }
 
-        DataLoader.LoadStudents();
+        DataLoader.LoadHeads();
     }
 
     private void OnClickRemoveUser(object sender, RoutedEventArgs e)
@@ -86,7 +84,7 @@ public partial class StudentView : UserControl
             command.Parameters.AddWithValue("@id", NpgsqlDbType.Integer, id);
             int result = command.ExecuteNonQuery();
 
-            DataLoader.LoadStudents();
+            DataLoader.LoadHeads();
         }
         catch (Exception ex)
         {

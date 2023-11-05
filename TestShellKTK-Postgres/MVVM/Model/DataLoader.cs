@@ -7,6 +7,7 @@ public class DataLoader
     public static ObservableCollection<User> Students { get; set; } = new();
 
     public static ObservableCollection<User> Teachers { get; set; } = new();
+    public static ObservableCollection<User> Heads { get; set; } = new();
     public static ObservableCollection<User> Users { get; set; } = new();
 
 
@@ -78,5 +79,31 @@ public class DataLoader
     
         reader.Close();
         return Teachers;
+    }
+    
+    public static ObservableCollection<User> LoadHeads()
+    {
+        Heads.Clear();
+        var command = PostgresRepository.Command("Select \"user\".id, username, fullname, \"password\", role.role_name From \"user\" " +
+                                                 "INNER JOIN role ON \"user\".role = role.id " +
+                                                 "WHERE role.role_name = 'head teacher'");
+    
+        var reader = command.ExecuteReader();
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                var id = reader.GetInt16(0);
+                var username = reader.GetString(1);
+                var fullName = reader.GetString(2);
+                var password = reader.GetString(3);
+                var userRole = reader.GetString(4);
+    
+                Heads.Add(new User(id, username, fullName , password, userRole));
+            }
+        }
+    
+        reader.Close();
+        return Heads;
     }
 }

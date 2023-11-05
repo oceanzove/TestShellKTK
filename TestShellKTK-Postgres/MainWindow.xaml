@@ -52,7 +52,8 @@
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuRadioButtonTheme}" />
+                             Style="{StaticResource MenuRadioButtonTheme}"
+                             Command="{Binding HeadViewCommand}"/>
                 <RadioButton Content="Students"
                              Height="50"
                              Foreground="White"
@@ -61,7 +62,7 @@
                              Command="{Binding StudentViewCommand}" />
 
             </StackPanel>
-
+             
             <TextBox Width="250"
                      Style="{StaticResource SearchTextBox}"
                      Height="40"

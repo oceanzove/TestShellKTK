@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TestShellKTK.MVVM.View.TeacherView"
+﻿<UserControl x:Class="TestShellKTK.MVVM.View.HeadView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -67,9 +67,9 @@
                         BorderBrush="{StaticResource colorDarkA1}"
                         BorderThickness="1"
                         CornerRadius="20">
-                    <Grid DataContext="{Binding Teachers}"
+                    <Grid DataContext="{Binding Heads}"
                           IsEnabled="False"
-                          Name="gUserEditor"
+                          Name="gStudentEditor"
                           Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60" />
@@ -99,7 +99,7 @@
                         BorderBrush="{StaticResource colorDarkA1}"
                         BorderThickness="1"
                         CornerRadius="20">
-                    <Grid DataContext="{Binding Teachers}"
+                    <Grid DataContext="{Binding Heads}"
                           Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60" />
@@ -157,7 +157,7 @@
                                         CornerRadius="15">
                                     <TextBlock Foreground="White" HorizontalAlignment="Center"
                                                VerticalAlignment="Center">
-                                        Total tests
+                                        @
                                     </TextBlock>
                                 </Border>
                                 <Border Grid.Row="1"
@@ -167,7 +167,7 @@
                                         CornerRadius="15">
                                     <TextBlock Foreground="White" HorizontalAlignment="Center"
                                                VerticalAlignment="Center">
-                                        Avg tests result
+                                        @
                                     </TextBlock>
                                 </Border>
 
@@ -180,6 +180,8 @@
                                 CornerRadius="20">
                             <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Icon</TextBlock>
                         </Border>
+
+
                     </Grid>
                 </Border>
             </Grid>
