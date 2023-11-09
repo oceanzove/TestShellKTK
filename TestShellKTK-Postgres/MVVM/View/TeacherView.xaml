@@ -167,7 +167,7 @@
                                         CornerRadius="15">
                                     <TextBlock Foreground="White" HorizontalAlignment="Center"
                                                VerticalAlignment="Center">
-                                        Avg tests result
+                                        The average result of his tests
                                     </TextBlock>
                                 </Border>
 
